@@ -24,29 +24,7 @@ export default function Home() {
         <MaskReveal />
       </section>
 
-      {/* 简介板块 */}
-      <section id="about" className="min-h-screen py-20 px-4">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold mb-8 text-zinc-900 dark:text-white">
-            关于我们
-          </h2>
-          <p className="text-lg text-zinc-600 dark:text-zinc-400">
-            这里是简介内容...
-          </p>
-        </div>
-      </section>
-
-      {/* 成员板块 */}
-      <section id="members" className="min-h-screen py-20 px-4 bg-zinc-50 dark:bg-zinc-900">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold mb-8 text-zinc-900 dark:text-white">
-            团队成员
-          </h2>
-          <p className="text-lg text-zinc-600 dark:text-zinc-400">
-            这里是成员内容...
-          </p>
-        </div>
-      </section>
+     
     </div>
   );
 }
