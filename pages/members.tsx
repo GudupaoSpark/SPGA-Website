@@ -1,5 +1,4 @@
 import { Geist, Geist_Mono } from "next/font/google";
-import { Navbar } from "./components/Navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,8 +15,6 @@ export default function Members() {
     <div
       className={`${geistSans.className} ${geistMono.className} min-h-screen bg-background text-foreground`}
     >
-      <Navbar />
-
       <main className="pt-24 px-8 max-w-4xl mx-auto">
         <h1 className="text-3xl font-bold mb-8">成员</h1>
 
