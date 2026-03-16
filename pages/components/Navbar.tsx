@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ThemeToggle } from "./ThemeToggle";
 import logoImage from "../assets/logo/logo.png";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 
 export function Navbar() {
@@ -13,6 +13,8 @@ export function Navbar() {
   const logoRef = useRef<HTMLImageElement>(null);
   const linksRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
+  const [isScrolled, setIsScrolled] = useState(false);
+  const animationRef = useRef<gsap.core.Tween | null>(null);
 
   useEffect(() => {
     const nav = navRef.current;
@@ -69,6 +71,66 @@ export function Navbar() {
     );
   }, []);
 
+  // 滚动监听
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const threshold = 100; // 滚动超过100px触发
+      const newScrolled = scrollY > threshold;
+
+      if (newScrolled !== isScrolled) {
+        setIsScrolled(newScrolled);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isScrolled]);
+
+  // 滚动动画效果
+  useEffect(() => {
+    const nav = navRef.current;
+    const links = linksRef.current;
+
+    if (!nav || !links) return;
+
+    // 取消之前的动画
+    if (animationRef.current) {
+      animationRef.current.kill();
+    }
+
+    if (isScrolled) {
+      // 滚动后：缩小导航栏，隐藏中间链接
+      gsap.to(nav, {
+        width: 180,
+        maxWidth: 180,
+        duration: 0.4,
+        ease: "power2.out",
+      });
+      gsap.to(links, {
+        opacity: 0,
+        scaleX: 0,
+        duration: 0.3,
+        ease: "power2.out",
+      });
+    } else {
+      // 回到顶部：恢复导航栏
+      gsap.to(nav, {
+        width: "calc(100vw - 2rem)",
+        maxWidth: 600,
+        duration: 0.5,
+        ease: "power2.out",
+      });
+      gsap.to(links, {
+        opacity: 1,
+        scaleX: 1,
+        duration: 0.4,
+        ease: "power2.out",
+        delay: 0.1,
+      });
+    }
+  }, [isScrolled]);
+
   const isActive = (path: string) => pathname === path;
 
   return (
@@ -91,7 +153,7 @@ export function Navbar() {
           />
         </Link>
 
-        <div ref={linksRef} className="flex-1 flex items-center justify-center gap-6 opacity-0">
+        <div ref={linksRef} className="flex-1 flex items-center justify-center gap-6 opacity-0 overflow-hidden">
           <Link
             href="/members"
             className={`text-sm font-medium transition-colors ${

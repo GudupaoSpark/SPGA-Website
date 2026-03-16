@@ -42,7 +42,27 @@ export default function Home() {
         </MaskReveal>
       </section>
 
-     
+      {/* 第二板块：关于SPGA */}
+      <section className="min-h-screen flex items-center justify-center px-8 py-20 bg-gradient-to-b from-background to-background/95">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12 md:gap-16">
+          {/* 左边Logo */}
+          <div className="flex-shrink-0">
+            <div className="w-48 h-48 md:w-64 md:h-64 rounded-full bg-gradient-to-br from-[#FFB7C5] to-[#FF9EB3] flex items-center justify-center shadow-2xl">
+              <span className="text-4xl md:text-5xl font-bold text-white">SPGA</span>
+            </div>
+          </div>
+          
+          {/* 右边文字 */}
+          <div className="flex-1 text-center md:text-left">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">
+              关于我们
+            </h2>
+            <p className="text-lg md:text-xl text-foreground/80 leading-relaxed">
+              SPGA（樱花生电联盟）服务器是Bilibili(b站)UP主，羊石_Demo（Demo_YS）在2026年初创立的Minecraft离线生电服务器，现在服务器由Gudupao运营，属于Gudupao旗下产品之一，由旗下工作室樱花生电联盟管理工作室负责。
+            </p>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
