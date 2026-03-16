@@ -102,8 +102,8 @@ export function Navbar() {
     if (isScrolled) {
       // 滚动后：缩小导航栏，隐藏中间链接
       gsap.to(nav, {
-        width: 180,
-        maxWidth: 180,
+        width: 240,
+        maxWidth: 240,
         duration: 0.4,
         ease: "power2.out",
       });
