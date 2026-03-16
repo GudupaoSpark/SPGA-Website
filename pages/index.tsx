@@ -43,7 +43,7 @@ export default function Home() {
       {/* 第二板块：关于SPGA */}
       <section className="min-h-screen flex items-center justify-center px-8 py-20 bg-gradient-to-b from-background to-background/95">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12 md:gap-16">
-          {/* 左边Logo */}
+          {/* 左边 Logo */}
           <div className="flex-shrink-0">
             <Image src={logo} alt="SPGA" width={256} height={256} />
           </div>

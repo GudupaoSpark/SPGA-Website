@@ -3,7 +3,10 @@ import { Html, Head, Main, NextScript } from "next/document";
 export default function Document() {
   return (
     <Html lang="zh-CN" suppressHydrationWarning>
-      <Head />
+      <Head>
+        <link rel="icon" href="/logo.png" />
+        <title>SPGA</title>
+      </Head>
       <body className="antialiased" suppressHydrationWarning>
         <Main />
         <NextScript />

@@ -9,6 +9,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider>
       <Head>
+        <link rel="icon" href="/logo.png" />
         <title>SPGA</title>
       </Head>
       <Navbar />
