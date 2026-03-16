@@ -1,5 +1,5 @@
 import { Geist, Geist_Mono } from "next/font/google";
-import MaskReveal from "./components/MaskReveal";
+import MaskReveal from "@/components/MaskReveal";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

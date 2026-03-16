@@ -1,48 +1,48 @@
 import { useEffect, useRef, useMemo, useState } from "react";
 import Image, { StaticImageData } from "next/image";
 import gsap from "gsap";
-import revealConfig from "../assets/home/reveal_config.json";
+import revealConfig from "@/assets/home/reveal_config.json";
 
 // 导入背景图片
-import backgroundImage from "../assets/home/background.jpg";
+import backgroundImage from "@/assets/home/background.jpg";
 
 // 静态导入所有 tile 图片
-import tile_r0_c0 from "../assets/home/tile_r0_c0.jpg";
-import tile_r0_c1 from "../assets/home/tile_r0_c1.jpg";
-import tile_r0_c2 from "../assets/home/tile_r0_c2.jpg";
-import tile_r0_c3 from "../assets/home/tile_r0_c3.jpg";
-import tile_r0_c4 from "../assets/home/tile_r0_c4.jpg";
-import tile_r0_c5 from "../assets/home/tile_r0_c5.jpg";
-import tile_r1_c0 from "../assets/home/tile_r1_c0.jpg";
-import tile_r1_c1 from "../assets/home/tile_r1_c1.jpg";
-import tile_r1_c2 from "../assets/home/tile_r1_c2.jpg";
-import tile_r1_c3 from "../assets/home/tile_r1_c3.jpg";
-import tile_r1_c4 from "../assets/home/tile_r1_c4.jpg";
-import tile_r1_c5 from "../assets/home/tile_r1_c5.jpg";
-import tile_r2_c0 from "../assets/home/tile_r2_c0.jpg";
-import tile_r2_c1 from "../assets/home/tile_r2_c1.jpg";
-import tile_r2_c2 from "../assets/home/tile_r2_c2.jpg";
-import tile_r2_c3 from "../assets/home/tile_r2_c3.jpg";
-import tile_r2_c4 from "../assets/home/tile_r2_c4.jpg";
-import tile_r2_c5 from "../assets/home/tile_r2_c5.jpg";
-import tile_r3_c0 from "../assets/home/tile_r3_c0.jpg";
-import tile_r3_c1 from "../assets/home/tile_r3_c1.jpg";
-import tile_r3_c2 from "../assets/home/tile_r3_c2.jpg";
-import tile_r3_c3 from "../assets/home/tile_r3_c3.jpg";
-import tile_r3_c4 from "../assets/home/tile_r3_c4.jpg";
-import tile_r3_c5 from "../assets/home/tile_r3_c5.jpg";
-import tile_r4_c0 from "../assets/home/tile_r4_c0.jpg";
-import tile_r4_c1 from "../assets/home/tile_r4_c1.jpg";
-import tile_r4_c2 from "../assets/home/tile_r4_c2.jpg";
-import tile_r4_c3 from "../assets/home/tile_r4_c3.jpg";
-import tile_r4_c4 from "../assets/home/tile_r4_c4.jpg";
-import tile_r4_c5 from "../assets/home/tile_r4_c5.jpg";
-import tile_r5_c0 from "../assets/home/tile_r5_c0.jpg";
-import tile_r5_c1 from "../assets/home/tile_r5_c1.jpg";
-import tile_r5_c2 from "../assets/home/tile_r5_c2.jpg";
-import tile_r5_c3 from "../assets/home/tile_r5_c3.jpg";
-import tile_r5_c4 from "../assets/home/tile_r5_c4.jpg";
-import tile_r5_c5 from "../assets/home/tile_r5_c5.jpg";
+import tile_r0_c0 from "@/assets/home/tile_r0_c0.jpg";
+import tile_r0_c1 from "@/assets/home/tile_r0_c1.jpg";
+import tile_r0_c2 from "@/assets/home/tile_r0_c2.jpg";
+import tile_r0_c3 from "@/assets/home/tile_r0_c3.jpg";
+import tile_r0_c4 from "@/assets/home/tile_r0_c4.jpg";
+import tile_r0_c5 from "@/assets/home/tile_r0_c5.jpg";
+import tile_r1_c0 from "@/assets/home/tile_r1_c0.jpg";
+import tile_r1_c1 from "@/assets/home/tile_r1_c1.jpg";
+import tile_r1_c2 from "@/assets/home/tile_r1_c2.jpg";
+import tile_r1_c3 from "@/assets/home/tile_r1_c3.jpg";
+import tile_r1_c4 from "@/assets/home/tile_r1_c4.jpg";
+import tile_r1_c5 from "@/assets/home/tile_r1_c5.jpg";
+import tile_r2_c0 from "@/assets/home/tile_r2_c0.jpg";
+import tile_r2_c1 from "@/assets/home/tile_r2_c1.jpg";
+import tile_r2_c2 from "@/assets/home/tile_r2_c2.jpg";
+import tile_r2_c3 from "@/assets/home/tile_r2_c3.jpg";
+import tile_r2_c4 from "@/assets/home/tile_r2_c4.jpg";
+import tile_r2_c5 from "@/assets/home/tile_r2_c5.jpg";
+import tile_r3_c0 from "@/assets/home/tile_r3_c0.jpg";
+import tile_r3_c1 from "@/assets/home/tile_r3_c1.jpg";
+import tile_r3_c2 from "@/assets/home/tile_r3_c2.jpg";
+import tile_r3_c3 from "@/assets/home/tile_r3_c3.jpg";
+import tile_r3_c4 from "@/assets/home/tile_r3_c4.jpg";
+import tile_r3_c5 from "@/assets/home/tile_r3_c5.jpg";
+import tile_r4_c0 from "@/assets/home/tile_r4_c0.jpg";
+import tile_r4_c1 from "@/assets/home/tile_r4_c1.jpg";
+import tile_r4_c2 from "@/assets/home/tile_r4_c2.jpg";
+import tile_r4_c3 from "@/assets/home/tile_r4_c3.jpg";
+import tile_r4_c4 from "@/assets/home/tile_r4_c4.jpg";
+import tile_r4_c5 from "@/assets/home/tile_r4_c5.jpg";
+import tile_r5_c0 from "@/assets/home/tile_r5_c0.jpg";
+import tile_r5_c1 from "@/assets/home/tile_r5_c1.jpg";
+import tile_r5_c2 from "@/assets/home/tile_r5_c2.jpg";
+import tile_r5_c3 from "@/assets/home/tile_r5_c3.jpg";
+import tile_r5_c4 from "@/assets/home/tile_r5_c4.jpg";
+import tile_r5_c5 from "@/assets/home/tile_r5_c5.jpg";
 
 // 图片映射
 const tileImages: Record<string, StaticImageData> = {

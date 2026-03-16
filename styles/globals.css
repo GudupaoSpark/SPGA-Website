@@ -59,26 +59,6 @@
   border-color: var(--border);
 }
 
-/* 使用系统默认滚动条 */
-::-webkit-scrollbar {
-  width: initial;
-  height: initial;
-}
-
-::-webkit-scrollbar-track {
-  background: initial;
-}
-
-::-webkit-scrollbar-thumb {
-  background: initial;
-  border-radius: initial;
-}
-
-* {
-  scrollbar-width: auto;
-  scrollbar-color: initial;
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
@@ -114,4 +94,44 @@ body {
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;
+}
+
+/* 滚动条样式 - 跟随浏览器系统深浅色 */
+:root {
+  --scrollbar-bg: #f1f1f1;
+  --scrollbar-thumb: #c1c1c1;
+  --scrollbar-thumb-hover: #a1a1a1;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --scrollbar-bg: #2d2d2d;
+    --scrollbar-thumb: #555;
+    --scrollbar-thumb-hover: #666;
+  }
+}
+
+/* Webkit 浏览器 (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg);
 }

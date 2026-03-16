@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ThemeToggle } from "./ThemeToggle";
-import logoImage from "../assets/logo/logo.png";
+import logoImage from "@/assets/logo/logo.png";
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 
