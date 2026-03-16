@@ -15,8 +15,9 @@ export function Navbar() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
-  const animationRef = useRef<gsap.core.Tween | null>(null);
   const hasPlayedEntrance = useRef(false);
+  const isAnimating = useRef(false);
+  const animationTl = useRef<gsap.core.Timeline | null>(null);
 
   // 初始化时检查滚动位置
   useEffect(() => {
@@ -26,6 +27,7 @@ export function Navbar() {
     setIsInitialized(true);
   }, []);
 
+  // 入场动画
   useEffect(() => {
     const nav = navRef.current;
     const logo = logoRef.current;
@@ -37,6 +39,13 @@ export function Navbar() {
     if (hasPlayedEntrance.current) return;
 
     hasPlayedEntrance.current = true;
+    isAnimating.current = true;
+
+    const tl = gsap.timeline({
+      onComplete: () => {
+        isAnimating.current = false;
+      },
+    });
 
     // 根据当前滚动位置决定初始状态
     if (isScrolled) {
@@ -51,14 +60,14 @@ export function Navbar() {
         opacity: 0,
         scaleX: 0,
       });
-      gsap.fromTo(
+      tl.fromTo(
         logo,
         { opacity: 0 },
         { opacity: 1, duration: 0.5, ease: "power2.out" }
       );
     } else {
       // 在顶部，入场动画：从小胶囊展开
-      gsap.fromTo(
+      tl.fromTo(
         nav,
         {
           width: 180,
@@ -77,17 +86,19 @@ export function Navbar() {
       );
 
       // 导航链接淡入
-      gsap.fromTo(
+      tl.fromTo(
         links,
         { opacity: 0 },
-        { opacity: 1, duration: 0.6, ease: "power2.out", delay: 0.8 }
+        { opacity: 1, duration: 0.6, ease: "power2.out" },
+        "-=0.2"
       );
 
       // Logo 淡入
-      gsap.fromTo(
+      tl.fromTo(
         logo,
         { opacity: 0 },
-        { opacity: 1, duration: 0.5, ease: "power2.out", delay: 0.5 }
+        { opacity: 1, duration: 0.5, ease: "power2.out" },
+        "-=0.4"
       );
     }
   }, [isInitialized, isScrolled]);
@@ -96,7 +107,7 @@ export function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      const threshold = 100; // 滚动超过100px触发
+      const threshold = 100;
       const newScrolled = scrollY > threshold;
 
       if (newScrolled !== isScrolled) {
@@ -108,49 +119,60 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isScrolled]);
 
-  // 滚动动画效果（只在初始化完成后响应滚动）
+  // 滚动动画效果
   useEffect(() => {
     const nav = navRef.current;
     const links = linksRef.current;
 
-    if (!nav || !links || !isInitialized) return;
+    if (!nav || !links || !hasPlayedEntrance.current) return;
 
     // 取消之前的动画
-    if (animationRef.current) {
-      animationRef.current.kill();
+    if (animationTl.current) {
+      animationTl.current.kill();
     }
+
+    // 创建新的 timeline
+    const tl = gsap.timeline();
+    animationTl.current = tl;
 
     if (isScrolled) {
       // 滚动后：缩小导航栏，隐藏中间链接
-      gsap.to(nav, {
+      tl.to(nav, {
         width: 240,
         maxWidth: 240,
         duration: 0.6,
         ease: "back.in(1.5)",
       });
-      gsap.to(links, {
-        opacity: 0,
-        scaleX: 0,
-        duration: 0.4,
-        ease: "back.in(1.5)",
-      });
+      tl.to(
+        links,
+        {
+          opacity: 0,
+          scaleX: 0,
+          duration: 0.4,
+          ease: "back.in(1.5)",
+        },
+        0
+      );
     } else {
       // 回到顶部：恢复导航栏
-      gsap.to(nav, {
+      tl.to(nav, {
         width: "calc(100vw - 2rem)",
         maxWidth: 600,
         duration: 0.7,
         ease: "back.out(1.5)",
       });
-      gsap.to(links, {
-        opacity: 1,
-        scaleX: 1,
-        duration: 0.5,
-        ease: "back.out(1.5)",
-        delay: 0.15,
-      });
+      tl.to(
+        links,
+        {
+          opacity: 1,
+          scaleX: 1,
+          duration: 0.5,
+          ease: "back.out(1.5)",
+        },
+        0.15
+      );
     }
-  }, [isScrolled, isInitialized]);
+  }, [isScrolled]);
 
   const isActive = (path: string) => pathname === path;
 
