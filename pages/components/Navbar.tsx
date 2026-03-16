@@ -207,16 +207,14 @@ export function Navbar() {
           >
             成员
           </Link>
-          <Link
-            href="/status"
-            className={`text-sm font-medium transition-colors ${
-              isActive("/status")
-                ? "text-zinc-900 dark:text-white"
-                : "text-zinc-600 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white"
-            }`}
+          <a
+            href="https://space.bilibili.com/642078584"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm font-medium transition-colors text-zinc-600 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white"
           >
-            状态
-          </Link>
+            联系
+          </a>
         </div>
 
         <div className="shrink-0">
